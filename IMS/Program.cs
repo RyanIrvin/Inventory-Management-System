@@ -1,3 +1,7 @@
+using IMS.Data;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace IMS
 {
     public class Program
@@ -8,6 +12,10 @@ namespace IMS
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Configurue DbContext with SQL Server
+            builder.Services.AddDbContext<InventoryDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
